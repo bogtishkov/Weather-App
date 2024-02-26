@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchWeatherApi } from 'openmeteo';
-import { User } from '../../api/api';
-import { ThermometerSnowflake, ThermometerSun, Cloud, Sun, CloudSnow, CloudDrizzle } from 'lucide-react';
+import { UserWeatherProps } from './UserWeather';
 
-interface UserWeatherProps {
-    user: User;
-}
-
-const UserWeather: React.FC<UserWeatherProps> = ({ user }) => {
+export const UserWeather: React.FC<UserWeatherProps> = ({ user }) => {
     const [currentTemperatureCelsius, setCurrentTemperatureCelsius] = useState<number | null>(null);
     const [maxTemperatureCelsius, setMaxTemperatureCelsius] = useState<number | null>(null);
     const [minTemperatureCelsius, setMinTemperatureCelsius] = useState<number | null>(null);
-    const [weatherIcon, setWeatherIcon] = useState<JSX.Element | null>(null);
     const [error, setError] = useState<string | null>(null);
 
 
@@ -44,18 +38,6 @@ const UserWeather: React.FC<UserWeatherProps> = ({ user }) => {
                 setCurrentTemperatureCelsius(Math.round((currentTemp - 32) * 5 / 9));
                 setMaxTemperatureCelsius(Math.round((maxTemp - 32) * 5 / 9));
                 setMinTemperatureCelsius(Math.round((minTemp - 32) * 5 / 9));
-
-                if (currentTemp > 25) {
-                    setWeatherIcon(<Sun />);
-                } else if (currentTemp > 10) {
-                    setWeatherIcon(<Cloud />);
-                } else if (currentTemp > 0) {
-                    setWeatherIcon(<CloudDrizzle />);
-                } else if (currentTemp <= 0) {
-                    setWeatherIcon(<CloudSnow />);
-                } else {
-                    setWeatherIcon(null);
-                }
             } catch (error) {
                 console.error('Error fetching weather data:', error);
                 setError('Error fetching weather data. Please try again later.');
@@ -74,27 +56,34 @@ const UserWeather: React.FC<UserWeatherProps> = ({ user }) => {
     }
 
     return (
-        <div className='flex justify-between px-1'>
-            <div className='grid'>
-                <h1 className="text-lg">Weather</h1>
-                <p className="text-sm">{formattedDate}</p>
-                <div className='flex gap-4'>
-                    {weatherIcon}
-                    {currentTemperatureCelsius}°C
-                </div>
-            </div>
-            <div className='grid px-10 py-5 gap-7'>
-                <div className='flex gap-2'>
-                    <ThermometerSun />
-                    {maxTemperatureCelsius}°C
-                </div>
-                <div className='flex gap-2'>
-                    <ThermometerSnowflake />
-                    {minTemperatureCelsius}°C
-                </div>
-            </div>
-        </div>
+
+
+
+
+
+
+
+
+    // <div className='flex justify-between px-1'>
+    //     <div className='grid'>
+    //         <h1 className="text-lg">Weather</h1>
+    //         <p className="text-sm">{formattedDate}</p>
+    //         <p>Current Temperature: {currentTemperatureCelsius}°C</p>
+    //     </div>
+    //     <div className='grid px-10 py-5 gap-7'>
+    //         <div className='flex gap-2'>
+    //             <ThermometerSun />
+    //             {maxTemperatureCelsius}°C
+    //         </div>
+    //         <div className='flex gap-2'>
+    //             <ThermometerSnowflake />
+    //             {minTemperatureCelsius}°C
+    //         </div>
+    //         <div className='flex'>
+    //             <Button>Save</Button>
+    //             <Button>Weather details</Button>
+    //         </div>
+    //     </div>
+    // </div>
     );
 };
-
-export default UserWeather;

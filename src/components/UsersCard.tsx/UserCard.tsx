@@ -43,7 +43,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 </div>
             </div>
             <div>
-                <UserWeather user={user}/> 
+                <UserWeather user={user} />
             </div>
         </div>
     );
