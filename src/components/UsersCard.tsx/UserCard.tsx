@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../../api/api';
 import { Mail, MapPin, PersonStanding } from 'lucide-react';
+import UserWeather from './UserWeather';
 
 interface UserCardProps {
     user: User;
@@ -29,20 +30,24 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
             <div className="bg-white rounded-lg p-6">
                 <div className='flex items-center gap-2 mb-4'>
                     <MapPin className="w-10 h-10" />
-                    <strong 
+                    <strong
                         className="text-sm">
-                            Location:
-                        </strong> {user.location.street.number} {user.location.street.name}, 
-                        {user.location.city}, {user.location.state}, {user.location.country}, 
-                        {user.location.postcode}
+                        Location:
+                    </strong> {user.location.street.number} {user.location.street.name},
+                    {user.location.city}, {user.location.state}, {user.location.country},
+                    {user.location.postcode}
                 </div>
                 <div className='flex items-center gap-2'>
                     <PersonStanding className="w-7 h-7" />
                     <strong className="text-sm">Gender:</strong> {user.gender}
                 </div>
             </div>
+            <div>
+                <UserWeather user={user}/> 
+            </div>
         </div>
     );
 };
 
 export default UserCard;
+

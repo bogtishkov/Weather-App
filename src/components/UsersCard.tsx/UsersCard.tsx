@@ -25,7 +25,7 @@ const UsersCard: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <ClipLoader color="#4A90E2" loading={true} size={50} />;
+        return <ClipLoader color="#4A90E2" loading={true} size={70} />;
     }
 
     if (error) {

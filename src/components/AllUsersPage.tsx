@@ -18,7 +18,13 @@ const AllUsersPage = () => {
                     </div>
                 </Button>
             </div>
-            <div className="flex">
+            <div className="grid grid-cols-3">
+                <UsersCard />
+                <UsersCard />
+                <UsersCard />
+                <UsersCard />
+                <UsersCard />
+                <UsersCard />
                 <UsersCard />
                 <UsersCard />
                 <UsersCard />
