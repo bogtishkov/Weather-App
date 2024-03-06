@@ -1,34 +1,26 @@
 import { Heart } from "lucide-react"
 import { Button } from "./ui/button"
-import UsersCard from "./UsersCard.tsx/UsersCard"
+import UserList from "./Users/UserList"
 
 const AllUsersPage = () => {
+
+    // 
     return (
         <div className="grid-cols-3	p-10">
-            <div className="flex justify-between p-10">
+            <div className="grid gap-6 py-6 md:flex md:justify-between md:py-10 ">
                 <h1 className="text-4xl font-semibold">
                     Users
                 </h1>
                 <Button variant={"outline"}>
                     <div className="flex items-center">
-                        <Heart />
+                        <Heart className="fill-black" />
                         <p className="p-2">
                             View saved users
                         </p>
                     </div>
                 </Button>
             </div>
-            <div className="grid grid-cols-3">
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-                <UsersCard />
-            </div>
+            <UserList />
         </div>
     )
 }
