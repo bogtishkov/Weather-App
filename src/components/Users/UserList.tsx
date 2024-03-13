@@ -12,7 +12,7 @@ const getWeatherApiUrl = ({
     latitude: string;
     longitude: string;
 }) =>
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1`;
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1`
 
 const useUsersWithWeather = (): UseUsersWithWeatherHookResult => {
     const [loading, setLoading] = useState(false);
@@ -45,6 +45,7 @@ const useUsersWithWeather = (): UseUsersWithWeatherHookResult => {
             .map((coordinates) => coordinates.longitude)
             .join(",");
 
+
         const fetchedResult = await fetch(
             getWeatherApiUrl({
                 latitude: latitudesString,
@@ -61,7 +62,12 @@ const useUsersWithWeather = (): UseUsersWithWeatherHookResult => {
                 weatherCode: weather.current.weather_code,
                 currentTemperature: weather.current.temperature_2m,
                 minTemperature: weather.daily.temperature_2m_min[0],
-                maxTemperature: weather.daily.temperature_2m_max[0]
+                maxTemperature: weather.daily.temperature_2m_max[0],
+                windSpeed: weather.current.wind_speed_10m,
+                hourly: weather.hourly.temperature_2m.map((temperature, index) => ({
+                    temperature,
+                    time: weather.hourly.time[index]
+                }))
             },
         }))
 

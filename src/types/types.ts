@@ -39,12 +39,23 @@ export type Weather = {
     weatherCode: number;
     minTemperature: number;
     maxTemperature: number;
+    windSpeed: number;
+    hourly: {
+        temperature: number;
+        time: string;
+    }[];
 };
 
 export type WeatherFromOpenMeteo = {
     current: {
         temperature_2m: number;
         weather_code: number;
+        wind_speed_10m: number;
+    };
+    hourly: {
+        temperature_2m: number[];
+        time: string[];
+        weather_code: number[];
     };
     daily: {
         temperature_2m_max: number[];

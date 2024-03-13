@@ -1,8 +1,9 @@
 import { User } from "@/types/types";
 import { CloudSun, Heart, Mail, MapPin, PersonStanding } from "lucide-react";
 import UserWeather from "./UserWeather";
-import { useState } from "react";
 import { Button } from "../ui/button";
+import WeatherInfoDialog from "../WeatherDialog/WeatherInfoDialog";
+
 
 interface UserCardProps {
     user: User;
@@ -10,7 +11,6 @@ interface UserCardProps {
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, saved }) => {
-
     return (
         <div className="bg-gray-100 rounded-lg shadow-md mb-4 p-6 w-full">
             <div className="flex items-center mb-6">
@@ -54,10 +54,12 @@ const UserCard: React.FC<UserCardProps> = ({ user, saved }) => {
                         <Heart className='w-4 h-4 mr-2' />
                         Save
                     </Button>)}
-                <Button>
-                    <CloudSun className='w-4 h-4 mr-2' />
-                    Weather details
-                </Button>
+                <WeatherInfoDialog user={user}>
+                    <Button>
+                        <CloudSun className='w-4 h-4 mr-2' />
+                        Weather details
+                    </Button>
+                </WeatherInfoDialog>
             </div>
         </div>
 
