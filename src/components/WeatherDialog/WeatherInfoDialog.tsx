@@ -1,7 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -23,7 +22,7 @@ const WeatherInfoDialog: React.FC<WeatherDialogProps> = ({ user, children: dialo
     return (
         <div>
             <Dialog>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                     {dialogTrigger}
                 </DialogTrigger>
                 <DialogContent className="w-[420px] h-[882px] md:min-w-[600px] lg:min-w-[758px]">
@@ -31,8 +30,8 @@ const WeatherInfoDialog: React.FC<WeatherDialogProps> = ({ user, children: dialo
                         <DialogTitle>
                             Weather for {`${user.basicInfo.name.first} ${user.basicInfo.name.last}`}
                         </DialogTitle>
-                        <DialogDescription>
-                            <div className="grid justify-center py-10 gap-4">
+                    </DialogHeader>
+                    <div className="grid justify-center py-10 gap-4">
                                 <div className="flex justify-center text-lg text-slate-800">
                                     {`
                                     ${user.basicInfo.location.city}, 
@@ -67,8 +66,6 @@ const WeatherInfoDialog: React.FC<WeatherDialogProps> = ({ user, children: dialo
                                 <WeatherCarousel user={user} />
                                 <Map user={user} />
                             </div>
-                        </DialogDescription>
-                    </DialogHeader>
                 </DialogContent>
             </Dialog>
         </div>
