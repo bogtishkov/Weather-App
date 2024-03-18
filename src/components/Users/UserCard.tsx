@@ -3,14 +3,22 @@ import { CloudSun, Heart, Mail, MapPin, PersonStanding } from "lucide-react";
 import UserWeather from "./UserWeather";
 import { Button } from "../ui/button";
 import WeatherInfoDialog from "../WeatherDialog/WeatherInfoDialog";
+import { useState } from "react";
 
 
 interface UserCardProps {
     user: User;
-    saved?: boolean
+    onSaveActionClick: () => void;
+    initialSaved?: boolean;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, saved }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, onSaveActionClick, initialSaved }) => {
+    const [saved, setSaved] = useState(initialSaved);
+    const handleSaveClick = () => {
+        onSaveActionClick();
+        setSaved(prev => !prev);
+        localStorage.setItem(user.basicInfo.email, JSON.stringify(user));
+    }
     return (
         <div className="bg-gray-100 rounded-lg shadow-md mb-4 p-6 w-full">
             <div className="flex items-center mb-6">
@@ -44,16 +52,31 @@ const UserCard: React.FC<UserCardProps> = ({ user, saved }) => {
             </div>
             <UserWeather user={user} />
             <div className="flex justify-end gap-2">
-                {saved ?
-                    (<Button variant='outline'>
+                {
+                    initialSaved ? (<Button
+                        variant='outline'
+                        onClick={handleSaveClick}>
                         <Heart className='fill-black w-4 h-4 mr-2' />
-                        Saved
-                    </Button>)
-                    :
-                    (<Button variant='outline'>
-                        <Heart className='w-4 h-4 mr-2' />
-                        Save
-                    </Button>)}
+                        Remove
+                    </Button>) :
+                        <>
+                            {saved ?
+                                (<Button
+                                    variant='outline'
+                                    onClick={handleSaveClick}>
+                                    <Heart className='fill-black w-4 h-4 mr-2' />
+                                    Saved
+                                </Button>)
+                                :
+                                (<Button
+                                    variant='outline'
+                                    onClick={handleSaveClick}>
+                                    <Heart className='w-4 h-4 mr-2' />
+                                    Save
+                                </Button>)}
+                        </>
+                }
+
                 <WeatherInfoDialog user={user}>
                     <Button>
                         <CloudSun className='w-4 h-4 mr-2' />
@@ -61,7 +84,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, saved }) => {
                     </Button>
                 </WeatherInfoDialog>
             </div>
-        </div>
+        </div >
 
     )
 }

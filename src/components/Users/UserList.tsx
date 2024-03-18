@@ -60,10 +60,10 @@ const useUsersWithWeather = (): UseUsersWithWeatherHookResult => {
             userId: usersCoordinates[index].userId,
             weather: {
                 weatherCode: weather.current.weather_code,
-                currentTemperature: weather.current.temperature_2m,
-                minTemperature: weather.daily.temperature_2m_min[0],
-                maxTemperature: weather.daily.temperature_2m_max[0],
-                windSpeed: weather.current.wind_speed_10m,
+                currentTemperature: Math.floor(weather.current.temperature_2m),
+                minTemperature: Math.floor(weather.daily.temperature_2m_min[0]),
+                maxTemperature: Math.floor(weather.daily.temperature_2m_max[0]),
+                windSpeed: Math.floor(weather.current.wind_speed_10m),
                 hourly: weather.hourly.temperature_2m.map((temperature, index) => ({
                     temperature,
                     time: weather.hourly.time[index]
@@ -108,7 +108,6 @@ const useUsersWithWeather = (): UseUsersWithWeatherHookResult => {
 
 export const UserList = () => {
     const { users, loading, onLoadMore } = useUsersWithWeather();
-
 
     if (loading) return <div>Loading</div>
 
