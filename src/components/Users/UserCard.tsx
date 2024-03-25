@@ -1,5 +1,5 @@
 import { User } from "@/types/types";
-import { CloudSun, Heart, Mail, MapPin, PersonStanding } from "lucide-react";
+import { CloudSun, Heart, HeartOff, Mail, MapPin, PersonStanding } from "lucide-react";
 import UserWeather from "./UserWeather";
 import { Button } from "../ui/button";
 import WeatherInfoDialog from "../WeatherDialog/WeatherInfoDialog";
@@ -16,9 +16,10 @@ const UserCard: React.FC<UserCardProps> = ({ user, onSaveActionClick, initialSav
     const [saved, setSaved] = useState(initialSaved);
     const handleSaveClick = () => {
         onSaveActionClick();
-        setSaved(prev => !prev);
+        setSaved(true);
         localStorage.setItem(user.basicInfo.email, JSON.stringify(user));
-    }
+      };
+
     return (
         <div className="bg-gray-100 rounded-lg shadow-md mb-4 p-6 w-full">
             <div className="flex items-center mb-6">
@@ -53,13 +54,12 @@ const UserCard: React.FC<UserCardProps> = ({ user, onSaveActionClick, initialSav
             <UserWeather user={user} />
             <div className="flex justify-end gap-2">
                 {
-                    initialSaved ? (<Button
-                        variant='outline'
-                        onClick={handleSaveClick}>
-                        <Heart className='fill-black w-4 h-4 mr-2' />
-                        Remove
-                    </Button>) :
-                        <>
+                    initialSaved ? (
+                        <Button
+                            variant='outline'>
+                            <HeartOff className='w-4 h-4 mr-2' />
+                            Remove
+                        </Button> ) : <>
                             {saved ?
                                 (<Button
                                     variant='outline'

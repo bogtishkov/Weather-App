@@ -10,15 +10,16 @@ const AllUsersGrid: React.FC<AllUsersGridProps> = ({ users }) => {
         return null;
     };
 
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-8 xl:gap-10">
             {users.map((user) =>
-                user.basicInfo && user.basicInfo.email ? (
+                user.basicInfo ? (
                     <UserCard
                         user={user}
                         key={user.basicInfo.email}
                         onSaveActionClick={handleSaveActionClick}
-                        initialSaved={false} />
+                        initialSaved={localStorage.getItem(user.basicInfo.email) ? true : false} />
                 ) : null
             )}
         </div>

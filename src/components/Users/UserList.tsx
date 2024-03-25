@@ -114,7 +114,7 @@ export const UserList = () => {
 
     return (
         <div className="flex flex-col items-center">
-            <AllUsersGrid users={users} />
+            <AllUsersGrid users={users}/>
             <Button variant="outline" className="w-fit" onClick={onLoadMore}>
                 Show more
             </Button>
